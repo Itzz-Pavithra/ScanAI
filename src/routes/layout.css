@@ -1,0 +1,197 @@
+@import 'tailwindcss';
+
+:root,
+[data-theme="chatgpt"] {
+	--bg-app: #050505;
+	--bg-surface: #111111;
+	--bg-surface-elevated: #18181b;
+	--bg-surface-glass: rgba(17, 17, 17, 0.78);
+	--border-subtle: #27272a;
+	--border-strong: #3f3f46;
+	--text-primary: #ffffff;
+	--text-secondary: #a1a1aa;
+	--text-muted: #71717a;
+	--accent-primary: #ffffff;
+	--accent-primary-text: #050505;
+	--accent-secondary: #e4e4e7;
+	--accent-glow: rgba(255, 255, 255, 0.2);
+	--accent-ring: rgba(255, 255, 255, 0.4);
+	--badge-bg: rgba(255, 255, 255, 0.12);
+	--badge-text: #ffffff;
+	--badge-border: rgba(255, 255, 255, 0.22);
+	--card-hover-border: #52525b;
+	--theme-gradient: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+	--scan-beam: rgba(255, 255, 255, 0.85);
+	--scan-glow: rgba(255, 255, 255, 0.35);
+}
+
+[data-theme="claude"] {
+	--bg-app: #100c09;
+	--bg-surface: #1c1510;
+	--bg-surface-elevated: #281e17;
+	--bg-surface-glass: rgba(28, 21, 16, 0.82);
+	--border-subtle: #36261c;
+	--border-strong: #54392a;
+	--text-primary: #fff6ee;
+	--text-secondary: #d4b8a5;
+	--text-muted: #967d6d;
+	--accent-primary: #d97736;
+	--accent-primary-text: #ffffff;
+	--accent-secondary: #f19a63;
+	--accent-glow: rgba(217, 119, 54, 0.3);
+	--accent-ring: rgba(241, 154, 99, 0.5);
+	--badge-bg: rgba(217, 119, 54, 0.16);
+	--badge-text: #f19a63;
+	--badge-border: rgba(217, 119, 54, 0.35);
+	--card-hover-border: #8a4c26;
+	--theme-gradient: linear-gradient(135deg, #d97736 0%, #f19a63 100%);
+	--scan-beam: #f19a63;
+	--scan-glow: rgba(217, 119, 54, 0.45);
+}
+
+[data-theme="gemini"] {
+	--bg-app: #080b16;
+	--bg-surface: #111729;
+	--bg-surface-elevated: #1a223a;
+	--bg-surface-glass: rgba(17, 23, 41, 0.84);
+	--border-subtle: #1e293b;
+	--border-strong: #334155;
+	--text-primary: #f8fafc;
+	--text-secondary: #94a3b8;
+	--text-muted: #64748b;
+	--accent-primary: #4285f4;
+	--accent-primary-text: #ffffff;
+	--accent-secondary: #ea4335;
+	--accent-yellow: #fbbc05;
+	--accent-green: #34a853;
+	--accent-glow: rgba(66, 133, 244, 0.35);
+	--accent-ring: rgba(66, 133, 244, 0.55);
+	--badge-bg: rgba(66, 133, 244, 0.18);
+	--badge-text: #60a5fa;
+	--badge-border: rgba(66, 133, 244, 0.35);
+	--card-hover-border: #4285f4;
+	--theme-gradient: linear-gradient(135deg, #4285f4 0%, #ea4335 35%, #fbbc05 70%, #34a853 100%);
+	--scan-beam: #4285f4;
+	--scan-glow: rgba(66, 133, 244, 0.5);
+}
+
+* {
+	box-sizing: border-box;
+	border-color: var(--border-subtle);
+}
+
+body {
+	font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	background-color: var(--bg-app);
+	color: var(--text-primary);
+	transition: background-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+	            color 300ms cubic-bezier(0.4, 0, 0.2, 1);
+	overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+	font-family: 'Outfit', 'Inter', system-ui, sans-serif;
+}
+
+code, pre, .font-mono {
+	font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+::-webkit-scrollbar-track {
+	background: var(--bg-app);
+}
+::-webkit-scrollbar-thumb {
+	background: var(--border-strong);
+	border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: var(--text-muted);
+}
+
+/* Animations */
+@keyframes scanline {
+	0% {
+		top: 0%;
+		opacity: 0.2;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		top: 100%;
+		opacity: 0.2;
+	}
+}
+
+.animate-scan {
+	animation: scanline 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes pulseSubtle {
+	0%, 100% {
+		opacity: 0.8;
+		transform: scale(1);
+	}
+	50% {
+		opacity: 1;
+		transform: scale(1.02);
+	}
+}
+
+.animate-pulse-subtle {
+	animation: pulseSubtle 3s ease-in-out infinite;
+}
+
+@keyframes floatOrb1 {
+	0% {
+		transform: translate(0px, 0px) scale(1);
+	}
+	33% {
+		transform: translate(30px, -50px) scale(1.1);
+	}
+	66% {
+		transform: translate(-20px, 20px) scale(0.95);
+	}
+	100% {
+		transform: translate(0px, 0px) scale(1);
+	}
+}
+
+@keyframes floatOrb2 {
+	0% {
+		transform: translate(0px, 0px) scale(1);
+	}
+	33% {
+		transform: translate(-40px, 40px) scale(0.9);
+	}
+	66% {
+		transform: translate(25px, -30px) scale(1.08);
+	}
+	100% {
+		transform: translate(0px, 0px) scale(1);
+	}
+}
+
+.animate-orb-1 {
+	animation: floatOrb1 22s ease-in-out infinite;
+}
+
+.animate-orb-2 {
+	animation: floatOrb2 28s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	::before,
+	::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+		scroll-behavior: auto !important;
+	}
+}

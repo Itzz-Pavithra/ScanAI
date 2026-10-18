@@ -1,0 +1,40 @@
+{
+  "name": "ScanAI — Multimodal AI Visual Scanner",
+  "short_name": "ScanAI",
+  "description": "Premium multimodal visual intelligence scanner powered by OpenAI, Claude, and Gemini.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#09090b",
+  "theme_color": "#09090b",
+  "categories": ["utilities", "productivity", "photography"],
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192 512x512 1024x1024",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "192x192 512x512 1024x1024",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/favicon.png",
+      "sizes": "32x32 64x64",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "New Visual Scan",
+      "short_name": "Scan",
+      "description": "Upload or capture an image to scan with AI",
+      "url": "/",
+      "icons": [{ "src": "/favicon.png", "sizes": "64x64" }]
+    }
+  ]
+}
