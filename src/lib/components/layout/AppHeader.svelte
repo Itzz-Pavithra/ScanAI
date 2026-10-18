@@ -1,9 +1,10 @@
 <script>
 	import { page } from '$app/state';
 	import { appState } from '$lib/stores/app-state.svelte.js';
+	import { pwaStore } from '$lib/stores/pwa.svelte.js';
 	import { AI_PROVIDERS } from '$lib/config/providers.js';
 	import MobileNavigation from './MobileNavigation.svelte';
-	import { Scan, History, Settings, ChevronDown, Sparkles, Menu, Cpu, User, LogIn, LogOut, Bookmark } from '@lucide/svelte';
+	import { Scan, History, Settings, ChevronDown, Sparkles, Menu, Cpu, User, LogIn, LogOut, Bookmark, Download } from '@lucide/svelte';
 
 	let isDropdownOpen = $state(false);
 	let isUserDropdownOpen = $state(false);
@@ -120,6 +121,20 @@
 
 		<!-- Right Controls: Provider Switcher & User Account Controls -->
 		<div class="flex items-center gap-3">
+			<!-- Install App Action -->
+			{#if !pwaStore.isInstalled}
+				<button
+					type="button"
+					onclick={() => pwaStore.install()}
+					aria-label="Install ScanAI App"
+					title="Install ScanAI App"
+					class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[var(--badge-bg)] hover:bg-[var(--border-subtle)] text-[var(--accent-primary)] border border-[var(--badge-border)] text-xs font-semibold transition-all cursor-pointer shadow-sm hover:scale-[1.02] active:scale-95"
+				>
+					<Download class="w-3.5 h-3.5" />
+					<span>Install App</span>
+				</button>
+			{/if}
+
 			<!-- Provider Dropdown Switcher -->
 			<div class="relative" id="provider-dropdown-container">
 				<button

@@ -13,17 +13,17 @@
 	<!-- Ambient Radial Gradient Orbs -->
 	{#if animationLevel !== 'off'}
 		<div
-			class="absolute -top-32 -left-32 h-[500px] w-[500px] rounded-full blur-[130px] transition-all duration-700 {animationLevel === 'full' ? 'animate-orb-1' : ''}"
+			class="absolute -top-32 -left-32 h-[500px] w-[500px] rounded-full blur-[130px] transition-colors duration-500 {animationLevel === 'full' ? 'animate-orb-1' : ''}"
 			style="background: {currentTheme.orbColors[0] || 'rgba(255,255,255,0.08)'};"
 		></div>
 
 		<div
-			class="absolute top-1/3 -right-36 h-[600px] w-[600px] rounded-full blur-[140px] transition-all duration-700 {animationLevel === 'full' ? 'animate-orb-2' : ''}"
+			class="absolute top-1/3 -right-36 h-[600px] w-[600px] rounded-full blur-[140px] transition-colors duration-500 {animationLevel === 'full' ? 'animate-orb-2' : ''}"
 			style="background: {currentTheme.orbColors[1] || 'rgba(255,255,255,0.05)'};"
 		></div>
 
 		<div
-			class="absolute -bottom-40 left-1/4 h-[550px] w-[550px] rounded-full blur-[150px] transition-all duration-700 {animationLevel === 'full' ? 'animate-orb-1' : ''}"
+			class="absolute -bottom-40 left-1/4 h-[550px] w-[550px] rounded-full blur-[150px] transition-colors duration-500 {animationLevel === 'full' ? 'animate-orb-1' : ''}"
 			style="background: {currentTheme.orbColors[2] || currentTheme.orbColors[0] || 'rgba(255,255,255,0.06)'};"
 		></div>
 	{/if}

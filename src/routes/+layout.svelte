@@ -2,6 +2,7 @@
 	import './layout.css';
 	import { onMount } from 'svelte';
 	import { appState } from '$lib/stores/app-state.svelte.js';
+	import { pwaStore } from '$lib/stores/pwa.svelte.js';
 	import AppHeader from '$lib/components/layout/AppHeader.svelte';
 	import AnimatedBackground from '$lib/components/background/AnimatedBackground.svelte';
 	import PwaManager from '$lib/components/pwa/PwaManager.svelte';
@@ -11,13 +12,16 @@
 
 	onMount(() => {
 		appState.init();
+		pwaStore.init();
 	});
 
 	// Keep DOM theme attribute in sync whenever selectedProvider updates
 	$effect(() => {
 		const current = appState.selectedProvider;
 		if (typeof document !== 'undefined' && document.documentElement) {
-			document.documentElement.dataset.theme = current;
+			if (document.documentElement.dataset.theme !== current) {
+				document.documentElement.dataset.theme = current;
+			}
 		}
 	});
 </script>

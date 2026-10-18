@@ -1,7 +1,8 @@
 <script>
 	import { appState } from '$lib/stores/app-state.svelte.js';
+	import { pwaStore } from '$lib/stores/pwa.svelte.js';
 	import { AI_PROVIDERS } from '$lib/config/providers.js';
-	import { X, Scan, History, Settings, Sparkles, User, LogIn, LogOut, ShieldCheck } from '@lucide/svelte';
+	import { X, Scan, History, Settings, Sparkles, User, LogIn, LogOut, ShieldCheck, Download } from '@lucide/svelte';
 
 	let { isOpen = false, onclose } = $props();
 
@@ -115,6 +116,19 @@
 						<Settings class="w-4 h-4 text-[var(--text-secondary)]" />
 						<span>Settings & Limits</span>
 					</a>
+					{#if !pwaStore.isInstalled}
+						<button
+							type="button"
+							onclick={() => {
+								if (onclose) onclose();
+								pwaStore.install();
+							}}
+							class="w-full flex items-center gap-3 px-4 py-3 rounded-2xl text-sm font-medium text-[var(--accent-primary)] hover:bg-[var(--badge-bg)] transition-colors text-left cursor-pointer"
+						>
+							<Download class="w-4 h-4" />
+							<span>Download / Install App</span>
+						</button>
+					{/if}
 				</nav>
 
 				<!-- Quick Provider Switcher -->

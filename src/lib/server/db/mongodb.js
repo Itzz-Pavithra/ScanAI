@@ -33,8 +33,25 @@ export async function getMongoClient() {
 				console.warn('[MongoDB] Index creation notice:', err.message);
 			}
 			return connectedClient;
-		}).catch((err) => {
+		}).catch(async (err) => {
 			clientPromise = null;
+			if (!uri.includes('127.0.0.1') && !uri.includes('localhost')) {
+				console.warn(`[MongoDB] Primary connection failed (${err.message}). Attempting fallback to local instance...`);
+				try {
+					const localClient = new MongoClient('mongodb://127.0.0.1:27017', {
+						maxPoolSize: 20,
+						serverSelectionTimeoutMS: 3000
+					});
+					const connectedLocal = await localClient.connect();
+					clientInstance = connectedLocal;
+					try {
+						await ensureIndexes(connectedLocal);
+					} catch (e) {}
+					return connectedLocal;
+				} catch (localErr) {
+					// Fall through to throw original error
+				}
+			}
 			throw new Error(`Failed to connect to MongoDB: ${err.message}`);
 		});
 	}

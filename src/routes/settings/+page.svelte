@@ -22,8 +22,12 @@
 		Trash2,
 		LogOut,
 		Save,
-		ShieldCheck
+		ShieldCheck,
+		Download,
+		Smartphone,
+		CheckCircle2
 	} from '@lucide/svelte';
+	import { pwaStore } from '$lib/stores/pwa.svelte.js';
 
 	let usageData = $state({
 		todayScans: 0,
@@ -336,6 +340,37 @@
 					<p class="text-xs text-[var(--text-secondary)]">{style.description}</p>
 				</button>
 			{/each}
+		</div>
+	</div>
+
+	<!-- Section: Application & Offline PWA -->
+	<div class="p-6 sm:p-8 rounded-3xl bg-[var(--bg-surface)] border border-[var(--border-subtle)] space-y-6">
+		<div class="flex items-center justify-between flex-wrap gap-4">
+			<div>
+				<h2 class="text-lg font-bold font-heading text-[var(--text-primary)] flex items-center gap-2">
+					<Smartphone class="w-5 h-5 text-[var(--accent-primary)]" />
+					<span>ScanAI Application & PWA</span>
+				</h2>
+				<p class="text-xs text-[var(--text-secondary)] mt-1">
+					Install ScanAI as a standalone app on your mobile device or desktop for instant visual access
+				</p>
+			</div>
+
+			{#if pwaStore.isInstalled}
+				<div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+					<CheckCircle2 class="w-4 h-4" />
+					<span>Installed (Standalone Mode)</span>
+				</div>
+			{:else}
+				<button
+					type="button"
+					onclick={() => pwaStore.install()}
+					class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[var(--btn-primary-bg)] text-[var(--btn-primary-text)] font-semibold text-xs shadow-md hover:opacity-90 active:scale-95 transition-all cursor-pointer"
+				>
+					<Download class="w-4 h-4" />
+					<span>Download / Install App</span>
+				</button>
+			{/if}
 		</div>
 	</div>
 

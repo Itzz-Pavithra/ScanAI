@@ -62,7 +62,13 @@ const SEED_HISTORY = [
 ];
 
 class AppStateManager {
-	selectedProvider = $state('chatgpt');
+	selectedProvider = $state(
+		typeof document !== 'undefined' &&
+		document.documentElement?.dataset?.theme &&
+		['chatgpt', 'claude', 'gemini'].includes(document.documentElement.dataset.theme)
+			? document.documentElement.dataset.theme
+			: 'chatgpt'
+	);
 	selectedStyle = $state('step-by-step');
 	uploadedImage = $state(null); // { file, previewUrl, name, size, type, width, height, compressed?: boolean }
 	question = $state('');
@@ -143,8 +149,10 @@ class AppStateManager {
 				localStorage.setItem('scanai_history', JSON.stringify(SEED_HISTORY));
 			}
 
-			// Apply theme to document
-			document.documentElement.dataset.theme = this.selectedProvider;
+			// Apply theme to document if needed
+			if (document.documentElement.dataset.theme !== this.selectedProvider) {
+				document.documentElement.dataset.theme = this.selectedProvider;
+			}
 
 			// Check backend API key configuration
 			await this.checkProviderConfig();

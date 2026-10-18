@@ -18,6 +18,15 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+		<script>
+			// Anti-flicker synchronous theme initialization
+			try {
+				const p = localStorage.getItem('scanai_provider');
+				if (p && ['chatgpt', 'claude', 'gemini'].includes(p)) {
+					document.documentElement.dataset.theme = p;
+				}
+			} catch (e) {}
+		</script>
 		%sveltekit.head%
 	</head>
 	<body data-sveltekit-preload-data="hover" class="min-h-screen bg-[var(--bg-app)] text-[var(--text-primary)] antialiased selection:bg-[var(--accent-glow)] selection:text-[var(--text-primary)]">
